@@ -42,10 +42,6 @@ class FileStorage:
         if obj_key in self.__objects.keys():
             del self.__objects[obj_key]
 
-    def close(self):
-        """Call the reload method"""
-        self.reload()
-
     def reload(self):
         """Loads storage dictionary from file"""
         from models.base_model import BaseModel
@@ -69,3 +65,8 @@ class FileStorage:
                         self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
+    def close(self):
+        """Call the reload method"""
+        self.reload()
+
+

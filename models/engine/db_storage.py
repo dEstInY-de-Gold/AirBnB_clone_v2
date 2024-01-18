@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 '''DataBase storage engine'''
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models.amenity import Amenity
 from models.base_model import Base
@@ -12,10 +12,13 @@ from models.state import State
 from models.user import User
 from os import getenv
 
-if getenv('HBNB_TYPE_STORAGE') == 'db':
-    from models.place import place_amenity
+metadata = MetaData()
+Base.metadata = metadata
 
-classes = {"User": User, "State": State, "City": City,
+if getenv('HBNB_TYPE_STORAGE') == 'db':
+    # from models.place import place_amenity
+
+    classes = {"User": User, "State": State, "City": City,
            "Amenity": Amenity, "Place": Place, "Review": Review}
 
 
@@ -79,7 +82,7 @@ class DBStorage:
 
     def delete(self, obj=None):
         ''' deletes from the current databse session the obj
-            is it's not None
+            It's not None
         '''
         if obj is not None:
             self.__session.query(type(obj)).filter(

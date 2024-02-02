@@ -7,6 +7,7 @@ from datetime import datetime
 from fabric.api import local
 from os.path import isdir
 
+
 def do_pack():
     '''
         A .tgz compressor function with fab
@@ -18,5 +19,5 @@ def do_pack():
         filename = 'versions/web_static_{}.tgz'.format(date)
         local('tar -cvzf {} web_static'.format(filename))
         return filename
-    except:
+    except Exception:
         return None

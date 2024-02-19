@@ -17,7 +17,7 @@ def state_list():
             LI tag: description of one State: <state.id>: <B><state.name></B>
     '''
     state = storage.all('State')
-    return render_templte('7-states_list.html', states = state)
+    return render_templte('7-states_list.html', states=state)
 
 
 @app.teardown_appcontext
